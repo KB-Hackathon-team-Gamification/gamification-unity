@@ -30,25 +30,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(100, new string[] { "평범한 나무상자다." });  // ID 100에 대한 대화 데이터 추가
         talkData.Add(200, new string[] { "누군가 사용했던 흔적이 있는 책상이다." });  // ID 200에 대한 대화 데이터 추가
 
-
-        // Quest Talk B24 | 퀘스트 아이디 10번부터 시작. 
-        talkData.Add(10 + 1000, new string[] { "우리 마을엔 이만수르가 살고 있다는 전설이 내려오지." 
-                                              ,"오른쪽 마을에 있는 호수 근처로 가면 만날 수 있을지도?"});
-
-        talkData.Add(11 + 2000, new string[] { "나를 찾다니 보통 실력이 아니군."
-                                              ,"내 보물 말인가?"
-                                              ,"원한다면 주도록 하지..."
-                                              ,"맞춰 봐라."
-                                              ,"이 세상 전부를 그곳에 두고 왔다"
-                                              ,"'상한가'는"
-                                              ,"실재한다!!!"});
-
-
-
-
-
         // B23 대화창 캐릭터 반영 보류 (스프라이트 부족) 
-        // Portrait Data 
         //portraitData.Add(1000 + 0,);
         //portraitData.Add(1000 + 1,);
         //portraitData.Add(1000 + 2,);
