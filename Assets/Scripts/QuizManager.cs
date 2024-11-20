@@ -12,19 +12,13 @@ public class QuizManager : MonoBehaviour
     public Button linkButton2;
     public Image financeImage;
 
+    public GameObject financeQuizPanel; 
+
     private string[] questions = {
         "주식은 회사의 소유권을 나타낸다.",
-        "채권은 주식보다 위험하다.",
-        "인플레이션은 화폐 가치가 하락하는 현상이다.",
-        "적금은 매월 일정 금액을 저축하는 방법이다.",
-        "신용카드의 이자는 항상 동일하다.",
-        "예금은 원금 보장이 된다.",
-        "비트코인은 중앙은행이 발행한다.",
-        "주식 배당금은 회사 이익에 따라 달라진다.",
-        "대출을 받을 때는 반드시 담보가 필요하다.",
-        "환율이 오르면 수출이 유리해진다."
+        "채권은 주식보다 위험하다."
     };
-    private bool[] answers = { true, false, true, true, false, true, false, true, false, true };
+    private bool[] answers = { true, false };
 
     private int currentQuestionIndex = 0;
     private int score = 0;
@@ -32,38 +26,50 @@ public class QuizManager : MonoBehaviour
     void Start()
     {
         ShowQuestion();
-        linkButton1.gameObject.SetActive(false);
+        linkButton1.gameObject.SetActive(false);    
         linkButton2.gameObject.SetActive(false);
         financeImage.gameObject.SetActive(false);
     }
 
     public void OnOButtonClicked()
     {
+        Debug.Log("O 버튼이 눌렸습니다.");
         CheckAnswer(true);
     }
 
     public void OnXButtonClicked()
     {
+        Debug.Log("X 버튼이 눌렸습니다.");
         CheckAnswer(false);
     }
 
     public void OpenLink1()
     {
-        Application.OpenURL("https://www.kbstar.com/");
+       RestartGame(); // 게임을 다시 시작
+
     }
 
     public void OpenLink2()
     {
-        Application.OpenURL("https://link2.com");
+        EndGame();
     }
 
     void ShowQuestion()
     {
+
+
         questionText.text = questions[currentQuestionIndex];
     }
 
     void CheckAnswer(bool playerAnswer)
     {
+        // (1) 범위 초과 확인
+        if (currentQuestionIndex >= answers.Length)
+        {
+            Debug.LogError("QuizManager 범위 초과 " + currentQuestionIndex);
+            return;
+        }
+
         if (playerAnswer == answers[currentQuestionIndex])
         {
             score++;
@@ -83,7 +89,25 @@ public class QuizManager : MonoBehaviour
 
     void ShowResults()
     {
-        questionText.text = "퀴즈가 끝났습니다! 최종 점수: " + score + "/" + questions.Length;
+
+        if (score == questions.Length) // 모든 문제를 맞힌 경우
+        {
+             // 결과 화면에서는 텍스트를 원래 위치로 복구
+            AdjustQuestionTextPosition(80f);
+            
+            questionText.text = "축하합니다!\n모든 문제를 맞히셨습니다!";
+
+            // 이미지를 보여줌
+            financeImage.gameObject.SetActive(true);
+        }
+        else // 틀린 문제가 있는 경우
+        {
+            questionText.text = $"아쉽습니다.\n최종 점수: {score}/{questions.Length}";
+
+            // 이미지를 숨김
+            financeImage.gameObject.SetActive(false);
+        }
+
 
         // O, X 버튼 비활성화하고, 링크 버튼과 이미지를 활성화합니다.
         oButton.gameObject.SetActive(false);
@@ -91,6 +115,49 @@ public class QuizManager : MonoBehaviour
 
         linkButton1.gameObject.SetActive(true);
         linkButton2.gameObject.SetActive(true);
-        financeImage.gameObject.SetActive(true);
     }
+
+    void RestartGame()
+{
+    // 점수 초기화
+    score = 0;
+    // 질문 인덱스 초기화
+    currentQuestionIndex = 0;
+
+    // UI 초기화
+    oButton.gameObject.SetActive(true);
+    xButton.gameObject.SetActive(true);
+    linkButton1.gameObject.SetActive(false);
+    linkButton2.gameObject.SetActive(false);
+    financeImage.gameObject.SetActive(false);
+
+    // 첫 번째 질문 다시 표시
+    ShowQuestion();
+
+    Debug.Log("게임이 다시 시작되었습니다.");
+}
+
+void EndGame()
+{
+    financeQuizPanel.SetActive(false);
+
+    Debug.Log("게임이 종료되었습니다.");
+}
+
+void AdjustQuestionTextPosition(float yOffset)
+{
+    // RectTransform 가져오기
+    RectTransform rectTransform = questionText.GetComponent<RectTransform>();
+
+    // Y 위치를 절대적으로 설정
+    rectTransform.anchoredPosition = new Vector2(
+        rectTransform.anchoredPosition.x, // X 위치는 유지
+        rectTransform.anchoredPosition.y + yOffset // 현재 Y 위치에 yOffset 추가
+    );
+    Debug.Log($"Adjusted Text Position: {rectTransform.anchoredPosition}");
+    Canvas.ForceUpdateCanvases();
+
+}
+
+
 }

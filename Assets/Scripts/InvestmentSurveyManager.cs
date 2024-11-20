@@ -24,23 +24,23 @@ public class InvestmentSurveyManager : MonoBehaviour
     [Header("Survey Questions")]
     private string[] questions = new string[]
     {
-        "ÃÖ±Ù 1³â°£ ÁÖ½Ä, Æİµå µî ÅõÀÚ °æÇèÀÌ ÀÖÀ¸½Å°¡¿ä?",
-        "ÅõÀÚ ¼Õ½ÇÀÌ ¹ß»ıÇØµµ °¨³»ÇÒ ¼ö ÀÖÀ¸½Å°¡¿ä?",
-        "Á¤±âÀûÀÎ ¼öÀÔÀÌ ÀÖÀ¸½Å°¡¿ä?",
-        "ºñ»óÀÚ±İÀ» º°µµ·Î º¸À¯ÇÏ°í °è½Å°¡¿ä?",
-        "Àå±â ÅõÀÚ(3³â ÀÌ»ó)¸¦ °í·ÁÇÏ°í °è½Å°¡¿ä?",
-        "ÅõÀÚ °ü·Ã Á¤º¸¸¦ Á¤±âÀûÀ¸·Î È®ÀÎÇÏ½Ã³ª¿ä?",
-        "ºĞ»êÅõÀÚÀÇ °³³äÀ» ÀÌÇØÇÏ°í °è½Å°¡¿ä?",
-        "ÅõÀÚ À§ÇèÀ» °¨¼öÇÏ´õ¶óµµ ³ôÀº ¼öÀÍÀ» Ãß±¸ÇÏ½Ã³ª¿ä?",
-        "Á¤±âÀûÀ¸·Î ÀúÃàÀÌ³ª ÅõÀÚ¸¦ ÇÏ°í °è½Å°¡¿ä?",
-        "±İÀ¶»óÇ°ÀÇ À§Çèµµ¸¦ ÀÌÇØÇÏ°í °è½Å°¡¿ä?"
+        "ìµœê·¼ 1ë…„ê°„ ì£¼ì‹, í€ë“œ ë“± íˆ¬ì ê²½í—˜ì´ ìˆìœ¼ì‹ ê°€ìš”?",
+        "íˆ¬ì ì†ì‹¤ì´ ë°œìƒí•´ë„ ê°ë‚´í•  ìˆ˜ ìˆìœ¼ì‹ ê°€ìš”?",
+        "ì •ê¸°ì ì¸ ìˆ˜ì…ì´ ìˆìœ¼ì‹ ê°€ìš”?",
+        "ë¹„ìƒìê¸ˆì„ ë³„ë„ë¡œ ë³´ìœ í•˜ê³  ê³„ì‹ ê°€ìš”?",
+        "ì¥ê¸° íˆ¬ì(3ë…„ ì´ìƒ)ë¥¼ ê³ ë ¤í•˜ê³  ê³„ì‹ ê°€ìš”?",
+        "íˆ¬ì ê´€ë ¨ ì •ë³´ë¥¼ ì •ê¸°ì ìœ¼ë¡œ í™•ì¸í•˜ì‹œë‚˜ìš”?",
+        "ë¶„ì‚°íˆ¬ìì˜ ê°œë…ì„ ì´í•´í•˜ê³  ê³„ì‹ ê°€ìš”?",
+        "íˆ¬ì ìœ„í—˜ì„ ê°ìˆ˜í•˜ë”ë¼ë„ ë†’ì€ ìˆ˜ìµì„ ì¶”êµ¬í•˜ì‹œë‚˜ìš”?",
+        "ì •ê¸°ì ìœ¼ë¡œ ì €ì¶•ì´ë‚˜ íˆ¬ìë¥¼ í•˜ê³  ê³„ì‹ ê°€ìš”?",
+        "ê¸ˆìœµìƒí’ˆì˜ ìœ„í—˜ë„ë¥¼ ì´í•´í•˜ê³  ê³„ì‹ ê°€ìš”?"
     };
 
     private int currentQuestionIndex = 0;
     private int[] selectedAnswers;
     private int yesCount = 0;
 
-    void Start()
+    void OnEnable()
     {
         if (!ValidateReferences())
         {
@@ -49,16 +49,24 @@ public class InvestmentSurveyManager : MonoBehaviour
         }
         InitializeUI();
         SetupButtons();
-        // ½ÃÀÛ ½Ã ¹Ù·Î ¼³¹® ½ÃÀÛ
+        // ì‹œì‘ ì‹œ ë°”ë¡œ ì„¤ë¬¸ ì‹œì‘
         BeginSurvey();
     }
+
+    // Start() ë©”ì„œë“œëŠ” í•„ìš” ì—†ë‹¤ë©´ ì‚­ì œí•˜ê±°ë‚˜ ë¹ˆ ìƒíƒœë¡œ ë‘ì„¸ìš”.
+    void Start()
+    {
+        // Start()ëŠ” ë¹„ì›Œë‘ê±°ë‚˜ ì‚­ì œí•´ë„ ë©ë‹ˆë‹¤.
+    }
+
+
     private void InitializeUI()
     {
         selectedAnswers = new int[questions.Length];
         for (int i = 0; i < selectedAnswers.Length; i++)
             selectedAnswers[i] = -1;
 
-        // ÃÊ±â UI »óÅÂ ¼³Á¤
+        // ì´ˆê¸° UI ìƒíƒœ ì„¤ì •
         surveyPanel.SetActive(true);
         contentPanel.SetActive(true);
         gradePanel.SetActive(false);
@@ -81,15 +89,15 @@ public class InvestmentSurveyManager : MonoBehaviour
     {
         if (answerPanel == null || answerButtonPrefab == null) return;
 
-        // ±âÁ¸ ¹öÆ°µé Á¦°Å
+        // ê¸°ì¡´ ë²„íŠ¼ë“¤ ì œê±°
         foreach (Transform child in answerPanel.transform)
         {
             Destroy(child.gameObject);
         }
 
-        // ¿¹ ¹öÆ° »ı¼º
+        // ì˜ˆ ë²„íŠ¼ ìƒì„±
         yesButton = Instantiate(answerButtonPrefab, answerPanel.transform);
-        // ÄÄÆ÷³ÍÆ®µé ¸í½ÃÀûÀ¸·Î È°¼ºÈ­
+        // ì»´í¬ë„ŒíŠ¸ë“¤ ëª…ì‹œì ìœ¼ë¡œ í™œì„±í™”
         Image yesImage = yesButton.GetComponent<Image>();
         if (yesImage != null)
         {
@@ -111,12 +119,12 @@ public class InvestmentSurveyManager : MonoBehaviour
         if (yesText != null)
         {
             yesText.enabled = true;
-            yesText.text = "¿¹";
+            yesText.text = "ì˜ˆ";
             yesText.alignment = TextAlignmentOptions.Center;
         }
         yesButton.onClick.AddListener(() => SelectAnswer(0));
 
-        // ¾Æ´Ï¿À ¹öÆ°µµ µ¿ÀÏÇÑ ¹æ½ÄÀ¸·Î Ã³¸®
+        // ì•„ë‹ˆì˜¤ ë²„íŠ¼ë„ ë™ì¼í•œ ë°©ì‹ìœ¼ë¡œ ì²˜ë¦¬
         noButton = Instantiate(answerButtonPrefab, answerPanel.transform);
         Image noImage = noButton.GetComponent<Image>();
         if (noImage != null)
@@ -139,7 +147,7 @@ public class InvestmentSurveyManager : MonoBehaviour
         if (noText != null)
         {
             noText.enabled = true;
-            noText.text = "¾Æ´Ï¿À";
+            noText.text = "ì•„ë‹ˆì˜¤";
             noText.alignment = TextAlignmentOptions.Center;
         }
         noButton.onClick.AddListener(() => SelectAnswer(1));
@@ -158,29 +166,37 @@ public class InvestmentSurveyManager : MonoBehaviour
 
     private void SetupButtons()
     {
-        // Confirm ¹öÆ° ¼³Á¤
+        // Confirm ë²„íŠ¼ ì„¤ì •
         confirmButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(OnConfirmButtonClick);
         confirmButton.gameObject.SetActive(false);
 
-        // URL ¹öÆ° ¼³Á¤
+        // URL ë²„íŠ¼ ì„¤ì •
         urlButton.onClick.RemoveAllListeners();
         urlButton.onClick.AddListener(OnUrlButtonClick);
         urlButton.gameObject.SetActive(false);
     }
+
     private void OnUrlButtonClick()
     {
         Application.OpenURL("https://obank.kbstar.com/quics?page=C020710");
     }
+
     private void OnConfirmButtonClick()
     {
-        // ¼³¹® Àç½ÃÀÛ
-        contentPanel.SetActive(true);
-        gradePanel.SetActive(false);
-        confirmButton.gameObject.SetActive(false);
-        urlButton.gameObject.SetActive(false);    // URL ¹öÆ° ºñÈ°¼ºÈ­
+        // ì„¤ë¬¸ íŒ¨ë„ ë‹«ê¸°
+        if (surveyPanel != null)
+        {
+            surveyPanel.SetActive(false); // surveyPanelì„ ë¹„í™œì„±í™”í•˜ì—¬ ë‹«ìŒ
+            Debug.Log("SurveyPanelì´ ë‹«í˜”ìŠµë‹ˆë‹¤.");
+        }
+        else
+        {
+            Debug.LogError("surveyPanelì´ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+        }
+
+        // ì„¤ë¬¸ ìƒíƒœ ì´ˆê¸°í™”
         ResetSurveyState();
-        BeginSurvey();
     }
 
     private void ResetSurveyState()
@@ -222,7 +238,7 @@ public class InvestmentSurveyManager : MonoBehaviour
 
     private IEnumerator MoveToNextQuestionAfterDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         if (currentQuestionIndex < questions.Length - 1)
         {
             currentQuestionIndex++;
@@ -242,33 +258,33 @@ public class InvestmentSurveyManager : MonoBehaviour
     }
     private (string grade, string description) CalculateGrade()
     {
-        if (yesCount <= 1) return ("6µî±Ş(¸Å¿ì³·ÀºÀ§Çè)", "¿ø±İ ¼Õ½ÇÀÇ À§ÇèÀÌ ¸Å¿ì ³·Àº »óÇ°À» ¼±È£ÇÏ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
-        if (yesCount <= 3) return ("5µî±Ş(³·ÀºÀ§Çè)", "¿ø±İ ¼Õ½ÇÀÇ À§ÇèÀÌ ³·Àº »óÇ°À» ¼±È£ÇÏ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
-        if (yesCount <= 5) return ("4µî±Ş(Áß¸³Çü)", "¿ø±İ ¼Õ½Ç°ú ÀÌÀÍ °¡´É¼ºÀÌ ±ÕÇüÀ» ÀÌ·ç´Â »óÇ°À» ¼±È£ÇÏ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
-        if (yesCount <= 7) return ("3µî±Ş(Àû±ØÅõÀÚÇü)", "³ôÀº ¼öÀÍÀ» À§ÇØ ³ôÀº À§ÇèÀ» °¨¼öÇÒ ¼ö ÀÖ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
-        if (yesCount <= 9) return ("2µî±Ş(°ø°İÅõÀÚÇü)", "¸Å¿ì ³ôÀº ¼öÀÍÀ» À§ÇØ ³ôÀº À§ÇèÀ» °¨¼öÇÒ ¼ö ÀÖ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
-        return ("1µî±Ş(À§Çè¼±È£Çü)", "ÅõÀÚ À§ÇèÀ» Àû±ØÀûÀ¸·Î ¼ö¿ëÇÏ°í ³ôÀº ¼öÀÍÀ» Ãß±¸ÇÏ´Â ÅõÀÚÀÚÀÔ´Ï´Ù.\n\n¸ÂÃã »óÇ°ÀÌ ±Ã±İÇÏ½Å°¡¿ä?\nÁö±İ ¹Ù·Î È®ÀÎÇØº¸¼¼¿ä!");
+        if (yesCount <= 1) return ("6ë“±ê¸‰(ë§¤ìš°ë‚®ì€ìœ„í—˜)", "ì›ê¸ˆ ì†ì‹¤ì˜ ìœ„í—˜ì´ ë§¤ìš° ë‚®ì€ ìƒí’ˆì„ ì„ í˜¸í•˜ëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
+        if (yesCount <= 3) return ("5ë“±ê¸‰(ë‚®ì€ìœ„í—˜)", "ì›ê¸ˆ ì†ì‹¤ì˜ ìœ„í—˜ì´ ë‚®ì€ ìƒí’ˆì„ ì„ í˜¸í•˜ëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
+        if (yesCount <= 5) return ("4ë“±ê¸‰(ì¤‘ë¦½í˜•)", "ì›ê¸ˆ ì†ì‹¤ê³¼ ì´ìµ ê°€ëŠ¥ì„±ì´ ê· í˜•ì„ ì´ë£¨ëŠ” ìƒí’ˆì„ ì„ í˜¸í•˜ëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
+        if (yesCount <= 7) return ("3ë“±ê¸‰(ì ê·¹íˆ¬ìí˜•)", "ë†’ì€ ìˆ˜ìµì„ ìœ„í•´ ë†’ì€ ìœ„í—˜ì„ ê°ìˆ˜í•  ìˆ˜ ìˆëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
+        if (yesCount <= 9) return ("2ë“±ê¸‰(ê³µê²©íˆ¬ìí˜•)", "ë§¤ìš° ë†’ì€ ìˆ˜ìµì„ ìœ„í•´ ë†’ì€ ìœ„í—˜ì„ ê°ìˆ˜í•  ìˆ˜ ìˆëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
+        return ("1ë“±ê¸‰(ìœ„í—˜ì„ í˜¸í˜•)", "íˆ¬ì ìœ„í—˜ì„ ì ê·¹ì ìœ¼ë¡œ ìˆ˜ìš©í•˜ê³  ë†’ì€ ìˆ˜ìµì„ ì¶”êµ¬í•˜ëŠ” íˆ¬ììì…ë‹ˆë‹¤.\n\në§ì¶¤ ìƒí’ˆì´ ê¶ê¸ˆí•˜ì‹ ê°€ìš”?\nì§€ê¸ˆ ë°”ë¡œ í™•ì¸í•´ë³´ì„¸ìš”!");
     }
 
     private void CompleteSurvey()
     {
-        // ContentPanel ºñÈ°¼ºÈ­
+        // ContentPanel ë¹„í™œì„±í™”
         contentPanel.SetActive(false);
 
-        // GradePanel È°¼ºÈ­ ¹× °á°ú Ç¥½Ã
+        // GradePanel í™œì„±í™” ë° ê²°ê³¼ í‘œì‹œ
         gradePanel.SetActive(true);
         confirmButton.gameObject.SetActive(true);
-        urlButton.gameObject.SetActive(true);    // URL ¹öÆ° È°¼ºÈ­
+        urlButton.gameObject.SetActive(true);    // URL ë²„íŠ¼ í™œì„±í™”
 
         var (grade, description) = CalculateGrade();
-        gradeText.text = $"°í°´´ÔÀÇ ÅõÀÚ¼ºÇâÀº\n\n{grade}\n{description}";
+        gradeText.text = $"ê³ ê°ë‹˜ì˜ íˆ¬ìì„±í–¥ì€\n\n{grade}\n{description}";
     }
     private void InitializeSurvey()
     {
         currentQuestionIndex = 0;
         yesCount = 0;
 
-        // UI ÃÊ±âÈ­
+        // UI ì´ˆê¸°í™”
         questionText.gameObject.SetActive(true);
         answerPanel.SetActive(true);
         ResetButtonStates();
