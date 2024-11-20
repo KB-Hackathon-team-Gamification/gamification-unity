@@ -134,8 +134,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8230622989588255822}
     m_Modifications:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 1378257607185588708, guid: 852b423e6ac19dc46966b0968f049566, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -152,7 +155,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 2583639249083510382, guid: 852b423e6ac19dc46966b0968f049566, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -233,8 +239,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 2754791073637498352, guid: 852b423e6ac19dc46966b0968f049566, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -275,7 +284,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 5052426703470146583, guid: 852b423e6ac19dc46966b0968f049566, type: 3}
       propertyPath: m_Name
       value: ContentPanel
@@ -330,13 +342,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8230622989588255822}
     m_Modifications:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 2522226766975472560, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -265
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 4434021613301378192, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_Name
       value: GradePanel
@@ -355,11 +373,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchorMax.y
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: 1
 =======
       value: 0
 >>>>>>> Stashed changes
+=======
+      value: 0
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchorMin.x
@@ -367,11 +389,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchorMin.y
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: 1
 =======
       value: 0
 >>>>>>> Stashed changes
+=======
+      value: 0
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_SizeDelta.x
@@ -411,6 +437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchoredPosition.x
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: 150
       objectReference: {fileID: 0}
@@ -424,6 +451,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
 >>>>>>> Stashed changes
+=======
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
       objectReference: {fileID: 0}
     - target: {fileID: 5141052968414455630, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -437,13 +471,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     - target: {fileID: 5599419771393139492, guid: 92b30cbde23896847955f42c0d15d7f2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -315
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> ffd18daf8be780b191d7b51b8925fe90909ed610
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
