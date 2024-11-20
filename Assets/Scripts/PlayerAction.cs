@@ -67,7 +67,7 @@ public class PlayerAction : MonoBehaviour
         // Scan Object (for interaction)
         if (Input.GetKeyDown(KeyCode.Space) && scanObject != null)
         {
-            //Debug.Log("This is: " + scanObject.name);
+            Debug.Log("eyCode.Spac: " + scanObject.name);
             manager.Action(scanObject);
         }
     }

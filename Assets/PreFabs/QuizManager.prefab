@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535ad1f44226cba4380ea143942b14e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 5506879847573688205, guid: 4012382938d64504cbbc5592e49a5e0d, type: 3}
-  oButton: {fileID: 2276248614415567893, guid: e10e6a92522f6e84383f95e8652dbbb7, type: 3}
-  xButton: {fileID: 4188947511934371331, guid: 763540456ccec2f4687c2b7c1452cceb, type: 3}
-  linkButton1: {fileID: 6507768450013824752, guid: af733a2d1040082488e4f80aec7b2d91, type: 3}
-  linkButton2: {fileID: 3866925188361562802, guid: da12a5103437d8544a98319b81685f88, type: 3}
-  financeImage: {fileID: 326863533845217950, guid: 961ba2b514bd9744ab64f0b25c22676f, type: 3}
+  questionText: {fileID: 5807907731039397774, guid: 4012382938d64504cbbc5592e49a5e0d, type: 3}
+  oButton: {fileID: 6775788540585285593, guid: e10e6a92522f6e84383f95e8652dbbb7, type: 3}
+  xButton: {fileID: 5520053226545839923, guid: 763540456ccec2f4687c2b7c1452cceb, type: 3}
+  linkButton1: {fileID: 8304082788398824990, guid: af733a2d1040082488e4f80aec7b2d91, type: 3}
+  linkButton2: {fileID: 7069162714268874713, guid: da12a5103437d8544a98319b81685f88, type: 3}
+  financeImage: {fileID: 8670237517599091653, guid: 961ba2b514bd9744ab64f0b25c22676f, type: 3}

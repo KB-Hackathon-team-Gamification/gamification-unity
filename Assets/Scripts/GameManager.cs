@@ -9,6 +9,8 @@ public class GameManager :  MonoBehaviour
 {
     public GameObject choicePanel;
     public GameObject financeQuizPanel;  
+    public GameObject surveyPanel; // SurveyPanel 추가
+    private int currentNpcId; // 현재 NPC의 ID를 저장할 변수
     public Button yesButton;
     public Button noButton;
     public TextMeshProUGUI yesText;  
@@ -39,20 +41,34 @@ public class GameManager :  MonoBehaviour
         }
         else
         {
-            Debug.LogError("choicePanel이 할당되지 않았습니다. Inspector에서 choicePanel을 연결해주세요.");
+            Debug.LogError("choicePanel이 할당되지 않았습니다");
         }
 
 
-        // 시작 시 financeQuizPanel 비활성화
+        // financeQuizPanel 비활성화
         if (financeQuizPanel != null)
         {
             financeQuizPanel.SetActive(false);
+            Debug.Log("FinanceQuizPanel 초기화됨.");
         }
         else
         {
             Debug.LogError("FinanceQuiz 오브젝트가 Inspector에서 연결되지 않았습니다.");
         }
 
+        // surveyPanel 초기화 및 비활성화
+        if (surveyPanel != null)
+        {
+            surveyPanel.SetActive(false); // 기본적으로 비활성화
+            Debug.Log("SurveyPanel 초기화됨.");
+
+        }else
+        {
+            Debug.LogError("surveyPanel 오브젝트가 Inspector에서 연결되지 않았습니다.");
+
+        }
+
+        // 버튼 클릭 이벤트 연결
         yesButton.onClick.AddListener(OnYesButtonClicked);
         noButton.onClick.AddListener(OnNoButtonClicked);
     }
@@ -69,10 +85,13 @@ public class GameManager :  MonoBehaviour
     {
         // Get Current Object
         scanObject = scanObj;
-       ObjData objData = scanObject.GetComponent<ObjData>();
-       Talk(objData.id, objData.isNpc);
+        ObjData objData = scanObject.GetComponent<ObjData>();
+        currentNpcId = objData.id; // NPC의 ID를 저장
+        Talk(objData.id, objData.isNpc);
 
         // visible talk for action
+        isAction = true;
+        Debug.Log("isShow: 0 " + isAction);
        talkPanel.SetBool("isShow", isAction);
     }
         
@@ -80,94 +99,177 @@ public class GameManager :  MonoBehaviour
 
     void Talk(int id, bool isNpc)
     {
-        int questTalkIndex = 0;
         string talkData = "";
-        // Set Talk Data
-        if (talk.isAnim){ // 애니메이션 실행 중이면 
-            talk.SetMsg(""); // 다음 메시지는 실행하지 않아도 됨. 
+         // 애니메이션 실행 중이면 대화를 초기화하지 않고 리턴
+        if (talk.isAnim){ 
+            talk.SetMsg("");  
             return;
-        }
-        else {
-             questTalkIndex = questManager.GetQuestTalkIndex(id);
-             talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
         }
 
-        
-        // End Talk
-        if (talkData == null) // 대화가 더 이상 없으면 종료
+        // 기본 대화 데이터 가져오기
+        talkData = talkManager.GetTalk(id, talkIndex);
+     
+        // 대화가 더 이상 없으면 종료
+        if (talkData == null)
         {
             isAction = false;
-            talkIndex = 0; // 이야기가 종료되면 초기화. 
-            Debug.Log(questManager.CheckQuest(id));
+            talkIndex = 0; // 대화 종료 후 초기화
             return;
         }
-        // Continue Talk
+
+        // 대화 출력 로직
         if (isNpc)
         {
-            // TypeEffecter 연결
-            talk.SetMsg(talkData);
-            // Show Portrait
-            protraitImg.color = new Color(1, 1, 1, 1); // npc라면 투명도 1(드러냄)
-            // Animation Portrait  B25
-            protraitIAnim.SetTrigger("doEffect");
-                prevPortrait = protraitImg.sprite;
+            talk.SetMsg(talkData); // 대화 텍스트 설정
+            protraitImg.color = new Color(1, 1, 1, 0); // NPC 초상화 표시
+            protraitIAnim.SetTrigger("doEffect"); // 초상화 애니메이션
+            prevPortrait = protraitImg.sprite; // 이전 초상화 저장
         }
         else 
         {
-            // Hide Talk
-            talk.SetMsg(talkData);
-            protraitImg.color = new Color(1, 1, 1, 0); // npc가 아니라면 투명도 0(숨김) 
+            talk.SetMsg(talkData); // 대화 텍스트 설정
+            protraitImg.color = new Color(1, 1, 1, 0); // NPC 초상화 숨기기
         }
-        // Next Talk
-        isAction = true;
-        talkIndex++; // 문장 뽑아내기. 
+
+        isAction = true; // 대화 활성화
+        talkIndex++; // 다음 문장으로 진행. 
 
         // 대화의 마지막 문장인지 확인
-        int totalLines = talkManager.GetTalkDataLength(id + questTalkIndex);
+        int totalLines = talkManager.GetTalkDataLength(id);
         if (talkIndex == totalLines) // 마지막 문장일 경우
         {
             ShowChoice();
         }
-
-
     }
+
+
     void ShowChoice()
     {
         // 선택지를 활성화합니다.
         choicePanel.SetActive(true);
     }
 
-    void OnYesButtonClicked()
+void OnYesButtonClicked()
+{
+    choicePanel.SetActive(false);
+
+        talkIndex = 0;
+        Debug.Log("talkIdx  초기화");
+    // NPC ID에 따라 패널 활성화
+    if (currentNpcId == 1000)
     {
-        choicePanel.SetActive(false);
+        Debug.Log("현재 대화정은 npc의 id는" + currentNpcId);
+
+        // financeQuizPanel 실행
         if (financeQuizPanel != null)
         {
+            // talkPanel이 활성화되어 있다면 비활성화
+            if (talkPanel != null && talkPanel.gameObject.activeSelf)
+            {
+                // talkPanel.gameObject.SetActive(false);
+        isAction = false;
+       talkPanel.SetBool("isShow", isAction);
+                // Debug.Log("TalkPanel이 비활성화되었습니다.1");
+            }
+
             financeQuizPanel.SetActive(true);
         }
         else
         {
-            Debug.LogError("FinanceQuiz 오브젝트가 Inspector에서 연결되지 않았습니다.");
+            Debug.LogError("FinanceQuizPanel이 연결되지 않았습니다.");
         }
     }
+    else if (currentNpcId == 2000)
+    {
+        // surveyPanel 실행
+        if (surveyPanel != null)
+        {
+            // talkPanel이 활성화되어 있다면 비활성화
+            if (talkPanel != null && talkPanel.gameObject.activeSelf)
+            {
+        isAction = false;
+       talkPanel.SetBool("isShow", isAction);
+                // talkPanel.gameObject.SetActive(false);
+                // Debug.Log("TalkPanel이 비활성화되었습니다.2");
+            }
+
+            surveyPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("SurveyPanel이 연결되지 않았습니다.");
+        }
+    }
+    else
+    {
+        Debug.LogWarning("알 수 없는 NPC ID입니다: " + currentNpcId);
+    }
+
+    // 대화 상태 종료
+    isAction = false;  
+}
+
 
     void OnNoButtonClicked()
     {
-        Debug.Log("플레이어가 '아니오'를 선택했습니다.");
+        // Debug.Log("플레이어가 '아니오'를 선택했습니다.");
         choicePanel.SetActive(false);
+        isAction = false;
+       talkPanel.SetBool("isShow", isAction);
+        talkIndex = 0;
+        Debug.Log("talkIdx  초기화");
         // 아니오를 선택했을 때 실행할 로직 추가
     }
 
     public void CloseQuiz()
     {
-        Debug.Log("돌아가기 버튼이 클릭되었습니다.");
-    if (financeQuizPanel != null)
-    {
-        financeQuizPanel.SetActive(false); // FinanceQuiz 패널을 비활성화하여 창을 닫음
+        Debug.Log("닫기 버튼이 클릭되었습니다.");
+        if (financeQuizPanel != null)
+        {
+            financeQuizPanel.SetActive(false); // FinanceQuiz 패널을 비활성화하여 창을 닫음
+        }
+        else
+        {
+            Debug.LogError("FinanceQuiz 패널을 찾을 수 없습니다.");
+        }
+
+        // 대화창 다시 활성화
+        if (talkPanel != null)
+        {
+            talkPanel.gameObject.SetActive(true); // 대화창 다시 활성화
+            talkPanel.SetBool("isShow", true); // 애니메이션 상태 설정
+            Debug.Log("TalkPanel이 다시 활성화되었습니다.");
+        }
+        else
+        {
+            Debug.LogError("talkPanel이 할당되지 않았습니다. Inspector에서 talkPanel을 연결해주세요.");
+        }
     }
-    else
+
+    public void CloseSurvey()
     {
-        Debug.LogError("FinanceQuiz 패널을 찾을 수 없습니다.");
-    }    }
+        Debug.Log("설문조사가 종료되었습니다.");
+        if (surveyPanel != null)
+        {
+            surveyPanel.SetActive(false); // SurveyPanel 비활성화하여 창을 닫음
+        }
+        else
+        {
+            Debug.LogError("SurveyPanel을 찾을 수 없습니다.");
+        }
+
+        // 대화창 다시 활성화
+        if (talkPanel != null)
+        {
+            talkPanel.gameObject.SetActive(true); // 대화창 다시 활성화
+            Debug.Log("TalkPanel이 다시 활성화되었습니다.");
+        }
+        else
+        {
+            Debug.LogError("talkPanel이 할당되지 않았습니다. Inspector에서 talkPanel을 연결해주세요.");
+        }
+    }
+
 
     // 화살표 위치를 변경하는 함수
     void HandleArrowMovement()
@@ -203,13 +305,11 @@ public class GameManager :  MonoBehaviour
         choicePanel.SetActive(false);
         if (isYesSelected)
         {
-            Debug.Log("플레이어가 '예'를 선택했습니다.");
-            // 예 선택 시 실행할 코드 추가
+            OnYesButtonClicked();
         }
         else
         {
-            Debug.Log("플레이어가 '아니오'를 선택했습니다.");
-            // 아니오 선택 시 실행할 코드 추가
+            OnNoButtonClicked();
         }
     }
 

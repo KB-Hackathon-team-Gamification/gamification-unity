@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choicePanel: {fileID: 8670930126782552385, guid: 1e814574dd4d18242beeae8ddc3bb7df, type: 3}
-  financeQuizPanel: {fileID: 2955594771953553791, guid: 9e448cd59a80fc84abdc5d2b266890b3, type: 3}
+  financeQuizPanel: {fileID: 7844395433837219462, guid: 9e448cd59a80fc84abdc5d2b266890b3, type: 3}
+  surveyPanel: {fileID: 3367581009611496805, guid: 261c3c4019f4bc74ea6d6bc7283571ad, type: 3}
   yesButton: {fileID: 2500284904166438806, guid: 98ffe70db63af714e8383e869e67f182, type: 3}
   noButton: {fileID: 2152951108831771682, guid: 69e25f579d099c447a45c1750acb4870, type: 3}
   yesText: {fileID: 6238338119704431222, guid: c3bb3079f6b9fc34baf9de8e61cc5b63, type: 3}
