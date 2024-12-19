@@ -47,10 +47,6 @@
 
 - **☕ Unity**
 
-**Infra**
-
-- **🟩 Unity**
-
 </div>
 
 
@@ -60,5 +56,3 @@
 |                          [최민준](https://github.com/veniharuka)                          |                           [최한솔](https://github.com/chuseok)                            |                         [최호진](https://github.com/gentle-tiger)                         |
 | :---------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
 | ![image](https://github.com/user-attachments/assets/3c3090a3-e0b9-439b-a16b-0506020b94ea) | ![image](https://github.com/user-attachments/assets/c72046ed-c9d5-44ce-9bd3-2ebb24e2e008) | ![image](https://github.com/user-attachments/assets/05a62117-2d66-499e-b9e2-9108549fb6e3) |
-| Unity 개발 | Unity 개발 | Unity 개발 |
-| - 성향분석 표 구현 <br /> - Unity 프로젝트 배포 | - 메인 화면 구현 <br /> - 캐릭터 이동 구현 | - O/X 퀴즈 구현 <br /> - 대화창 구현 |
